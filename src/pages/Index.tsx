@@ -1,126 +1,296 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sparkles, Zap, Target, TrendingUp } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Sparkles, Zap, MessageSquare, TrendingUp, ArrowRight, Check } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
 
+  const features = [
+    {
+      number: "01",
+      title: "Amplify Your Reach",
+      description: "AI-Powered Engagement",
+      color: "from-orange-500 to-orange-600",
+      icon: Zap,
+      delay: "0ms"
+    },
+    {
+      number: "02",
+      title: "Connect, Manage, and Analyze",
+      description: "Content Scheduling",
+      color: "from-pink-500 to-pink-600",
+      icon: MessageSquare,
+      delay: "100ms"
+    },
+    {
+      number: "03",
+      title: "Centralize Communication",
+      description: "Analytics Dashboard",
+      color: "from-purple-600 to-purple-700",
+      icon: TrendingUp,
+      delay: "200ms"
+    }
+  ];
+
+  const benefits = [
+    "Generate viral scripts in seconds",
+    "Professional hooks that grab attention",
+    "Conversion-focused CTAs",
+    "Save hours of writing time",
+    "Unlimited creativity with AI",
+    "Perfect for all platforms"
+  ];
+
   return (
-    <div className="min-h-screen">
-      <div className="bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-        <header className="border-b bg-card/50 backdrop-blur-sm">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-xl">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold">ScriptFlow AI</span>
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+                <Sparkles className="h-5 w-5 text-primary-foreground" />
+              </div>
+              <span className="text-xl font-bold">ScriptFlow</span>
             </div>
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={() => navigate("/auth")}>
+            <nav className="hidden md:flex items-center gap-8">
+              <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Features
+              </a>
+              <a href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Pricing
+              </a>
+              <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                About us
+              </a>
+            </nav>
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" onClick={() => navigate("/auth")} className="hidden sm:flex">
                 Sign In
               </Button>
-              <Button onClick={() => navigate("/auth")}>Get Started</Button>
+              <Button onClick={() => navigate("/auth")} className="font-medium">
+                Start Free Trial
+              </Button>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
-        <section className="container mx-auto px-4 py-20 text-center">
-          <div className="max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
-              <Sparkles className="h-4 w-4" />
-              <span className="text-sm font-medium">AI-Powered Script Generation</span>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden py-20 lg:py-32">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5" />
+        <div className="container relative mx-auto px-4 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-card px-4 py-2 text-sm animate-fade-in">
+              <span className="flex h-2 w-2 rounded-full bg-green-500" />
+              <span className="font-medium">5 Free Scripts • No Credit Card Required</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Create Viral Scripts in Seconds
+            <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight lg:text-7xl animate-fade-in" style={{ animationDelay: "100ms" }}>
+              Create Viral Scripts
+              <br />
+              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                in Seconds
+              </span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Generate complete video scripts with hooks, storylines, and CTAs using AI. 
-              Perfect for TikTok, YouTube Shorts, and Reels.
+            <p className="mb-10 text-lg text-muted-foreground lg:text-xl animate-fade-in" style={{ animationDelay: "200ms" }}>
+              AI-powered script generation for TikTok, YouTube Shorts, and Reels.
+              <br />
+              From hook to CTA, we've got you covered.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" onClick={() => navigate("/auth")} className="text-lg">
-                <Sparkles className="h-5 w-5 mr-2" />
-                Start Creating Free
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center animate-fade-in" style={{ animationDelay: "300ms" }}>
+              <Button size="lg" onClick={() => navigate("/auth")} className="group text-base">
+                Get Started Free
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button size="lg" variant="outline" onClick={() => navigate("/auth")}>
-                View Examples
+                View Demo
               </Button>
             </div>
-            <p className="text-sm text-muted-foreground mt-4">
-              5 free scripts • No credit card required
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Check className="h-4 w-4 text-primary" />
+                <span>No credit card</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="h-4 w-4 text-primary" />
+                <span>5 free scripts</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="h-4 w-4 text-primary" />
+                <span>Cancel anytime</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="py-20 lg:py-32">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-3xl font-bold lg:text-5xl">
+              Everything You Need to
+              <br />
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Create Amazing Scripts
+              </span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Powerful AI features designed for content creators
             </p>
           </div>
-        </section>
 
-        <section className="container mx-auto px-4 py-16">
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <Zap className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Lightning Fast</CardTitle>
-                <CardDescription>
-                  Generate complete scripts in seconds, not hours
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Our AI analyzes your idea and creates engaging hooks, compelling stories, 
-                  and powerful CTAs instantly.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Target className="h-10 w-10 text-secondary mb-2" />
-                <CardTitle>Conversion Focused</CardTitle>
-                <CardDescription>
-                  Scripts designed to drive engagement and action
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Every script is optimized for viewer retention and conversions, 
-                  following proven content frameworks.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <TrendingUp className="h-10 w-10 text-accent mb-2" />
-                <CardTitle>Built for Growth</CardTitle>
-                <CardDescription>
-                  Scale your content creation effortlessly
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Create unlimited variations, test different angles, and find what 
-                  resonates with your audience.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <Card
+                  key={index}
+                  className="group relative overflow-hidden border-2 p-8 transition-all hover:shadow-lg hover:-translate-y-1 animate-scale-in"
+                  style={{ animationDelay: feature.delay }}
+                >
+                  <div className={`absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br ${feature.color} opacity-10 blur-2xl transition-opacity group-hover:opacity-20`} />
+                  <div className="relative">
+                    <div className={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.color} text-white shadow-lg`}>
+                      <Icon className="h-8 w-8" />
+                    </div>
+                    <div className={`mb-2 text-6xl font-bold bg-gradient-to-br ${feature.color} bg-clip-text text-transparent`}>
+                      {feature.number}
+                    </div>
+                    <h3 className="mb-2 text-xl font-bold">{feature.title}</h3>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="container mx-auto px-4 py-16 text-center">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4">Ready to Create?</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Join thousands of creators using AI to write better scripts faster
-            </p>
-            <Button size="lg" onClick={() => navigate("/auth")}>
-              <Sparkles className="h-5 w-5 mr-2" />
-              Get Started Free
-            </Button>
+      {/* Benefits Section */}
+      <section className="py-20 lg:py-32 bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            <div>
+              <h2 className="mb-6 text-3xl font-bold lg:text-5xl">
+                Why Choose
+                <br />
+                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  ScriptFlow AI?
+                </span>
+              </h2>
+              <p className="mb-8 text-lg text-muted-foreground">
+                Stop wasting time staring at a blank page. Let AI do the heavy lifting while you focus on creating amazing content.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {benefits.map((benefit, index) => (
+                  <div key={index} className="flex items-start gap-3 animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                      <Check className="h-4 w-4 text-primary" />
+                    </div>
+                    <span className="text-sm font-medium">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+              <Button size="lg" onClick={() => navigate("/auth")} className="mt-8">
+                Start Creating Now
+              </Button>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 blur-3xl" />
+              <Card className="relative p-8 shadow-2xl animate-float">
+                <div className="space-y-6">
+                  <div>
+                    <div className="mb-2 text-sm font-medium text-muted-foreground">Hook</div>
+                    <div className="rounded-lg bg-muted p-4">
+                      <p className="font-medium">"Tired of spending hours writing scripts?"</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="mb-2 text-sm font-medium text-muted-foreground">Body</div>
+                    <div className="rounded-lg bg-muted p-4">
+                      <p className="text-sm">ScriptFlow AI generates complete video scripts in seconds. Just enter your idea and get professional hooks, compelling stories, and powerful CTAs.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="mb-2 text-sm font-medium text-muted-foreground">CTA</div>
+                    <div className="rounded-lg bg-gradient-to-r from-primary to-secondary p-4">
+                      <p className="font-medium text-primary-foreground">"Try it free today and create your first viral script!"</p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
-      <footer className="border-t bg-card/50 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-          <p>© 2025 ScriptFlow AI. All rights reserved.</p>
+      {/* CTA Section */}
+      <section className="py-20 lg:py-32">
+        <div className="container mx-auto px-4 lg:px-8">
+          <Card className="relative overflow-hidden bg-gradient-to-br from-primary via-secondary to-accent p-12 lg:p-20">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20" />
+            <div className="relative mx-auto max-w-3xl text-center">
+              <h2 className="mb-6 text-4xl font-bold text-white lg:text-6xl">
+                Ready to Create Viral Content?
+              </h2>
+              <p className="mb-8 text-lg text-white/90">
+                Join thousands of creators using AI to write better scripts faster.
+                <br />
+                Start with 5 free scripts, no credit card required.
+              </p>
+              <Button size="lg" variant="secondary" onClick={() => navigate("/auth")} className="text-base shadow-xl">
+                <Sparkles className="mr-2 h-5 w-5" />
+                Start Your Free Trial
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8 py-12">
+          <div className="grid gap-8 md:grid-cols-4">
+            <div>
+              <div className="mb-4 flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+                  <Sparkles className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <span className="text-lg font-bold">ScriptFlow</span>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                AI-powered script generation for content creators.
+              </p>
+            </div>
+            <div>
+              <h3 className="mb-4 font-semibold">Product</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Examples</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 font-semibold">Company</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 font-semibold">Legal</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">Privacy</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Terms</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-12 border-t pt-8 text-center text-sm text-muted-foreground">
+            <p>© 2025 ScriptFlow AI. All rights reserved.</p>
+          </div>
         </div>
       </footer>
     </div>
