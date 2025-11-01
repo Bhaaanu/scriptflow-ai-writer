@@ -41,8 +41,21 @@ const Generator = () => {
   }, [navigate]);
 
   const generateScript = async () => {
-    if (!prompt.trim()) {
+    const trimmedPrompt = prompt.trim();
+    
+    // Client-side validation
+    if (!trimmedPrompt) {
       toast.error("Please enter a prompt");
+      return;
+    }
+    
+    if (trimmedPrompt.length < 10) {
+      toast.error("Prompt must be at least 10 characters");
+      return;
+    }
+    
+    if (trimmedPrompt.length > 500) {
+      toast.error("Prompt must be less than 500 characters");
       return;
     }
 
@@ -50,29 +63,12 @@ const Generator = () => {
     
     try {
       const response = await supabase.functions.invoke("generate-script", {
-        body: { prompt }
+        body: { prompt: trimmedPrompt }
       });
 
       if (response.error) throw response.error;
 
       setScript(response.data);
-      
-      // Deduct credit
-      if (user) {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("credits_remaining")
-          .eq("id", user.id)
-          .single();
-
-        if (profile && profile.credits_remaining > 0) {
-          await supabase
-            .from("profiles")
-            .update({ credits_remaining: profile.credits_remaining - 1 })
-            .eq("id", user.id);
-        }
-      }
-
       toast.success("Script generated!");
     } catch (error: any) {
       toast.error(error.message || "Failed to generate script");
@@ -138,7 +134,11 @@ const Generator = () => {
               onChange={(e) => setPrompt(e.target.value)}
               rows={4}
               className="resize-none"
+              maxLength={500}
             />
+            <p className="text-xs text-muted-foreground text-right">
+              {prompt.length}/500 characters
+            </p>
             <Button
               onClick={generateScript}
               disabled={generating || !prompt.trim()}

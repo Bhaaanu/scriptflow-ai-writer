@@ -13,8 +13,19 @@ Deno.serve(async (req) => {
   try {
     const { prompt } = await req.json();
 
-    if (!prompt) {
+    // Validate prompt input
+    if (!prompt || typeof prompt !== 'string') {
       throw new Error('Prompt is required');
+    }
+    
+    const trimmedPrompt = prompt.trim();
+    
+    if (trimmedPrompt.length < 10) {
+      throw new Error('Prompt must be at least 10 characters');
+    }
+    
+    if (trimmedPrompt.length > 500) {
+      throw new Error('Prompt must be less than 500 characters');
     }
 
     const supabase = createClient(
@@ -51,6 +62,19 @@ Deno.serve(async (req) => {
       throw new Error('No credits remaining. Please upgrade your plan.');
     }
 
+    // Deduct credit BEFORE generating script (prevent bypass)
+    const { data: updateResult, error: updateError } = await supabase
+      .from('profiles')
+      .update({ credits_remaining: profile.credits_remaining - 1 })
+      .eq('id', user.id)
+      .eq('credits_remaining', profile.credits_remaining) // Optimistic locking
+      .select('credits_remaining')
+      .single();
+
+    if (updateError || !updateResult) {
+      throw new Error('Failed to deduct credit. Please try again.');
+    }
+
     // Call Lovable AI to generate script
     const lovableResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -68,7 +92,7 @@ Return the result using a function call with three fields only: hook, body, cta.
           },
           {
             role: 'user',
-            content: prompt
+            content: trimmedPrompt
           }
         ],
         // Prefer structured outputs via tool calling
