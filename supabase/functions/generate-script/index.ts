@@ -63,23 +63,35 @@ Deno.serve(async (req) => {
         messages: [
           {
             role: 'system',
-            content: `You are a professional script writer for social media content. Generate a complete video script based on the user's prompt. Return ONLY a JSON object with three fields:
-- "hook": A compelling 1-2 sentence hook that grabs attention in the first 3 seconds
-- "body": A 2-4 sentence story/body that explains the value proposition
-- "cta": A clear 1-2 sentence call-to-action that drives engagement
-
-Example output:
-{
-  "hook": "Tired of bitter coffee ruining your mornings?",
-  "body": "Meet JavaJoy — crafted for flavor, roasted for smiles. Every sip is smooth, rich, and energizing.",
-  "cta": "Order today and start smiling with your first sip!"
-}`
+            content: `You are a professional script writer for social media content. Generate a complete video script based on the user's prompt.
+Return the result using a function call with three fields only: hook, body, cta.`
           },
           {
             role: 'user',
             content: prompt
           }
         ],
+        // Prefer structured outputs via tool calling
+        tools: [
+          {
+            type: 'function',
+            function: {
+              name: 'return_script',
+              description: 'Return the generated script in three parts',
+              parameters: {
+                type: 'object',
+                properties: {
+                  hook: { type: 'string', description: '1-2 sentence attention-grabbing hook' },
+                  body: { type: 'string', description: '2-4 sentence story/body explaining the value' },
+                  cta: { type: 'string', description: '1-2 sentence call to action' }
+                },
+                required: ['hook', 'body', 'cta'],
+                additionalProperties: false
+              }
+            }
+          }
+        ],
+        tool_choice: { type: 'function', function: { name: 'return_script' } },
         temperature: 0.8,
       }),
     });
@@ -89,28 +101,36 @@ Example output:
     }
 
     const aiData = await lovableResponse.json();
-    const scriptContent = aiData.choices[0].message.content;
-    
-    // Robustly extract JSON from the AI response (handles code fences and extra text)
-    const extractJson = (text: string): string | null => {
-      const t = text.trim();
-      // 1) Prefer fenced code block ```json ... ```
-      const fenceMatch = t.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
-      if (fenceMatch?.[1]) return fenceMatch[1];
-      // 2) Fallback: grab first JSON object delimited by braces
-      const first = t.indexOf('{');
-      const last = t.lastIndexOf('}');
-      if (first !== -1 && last !== -1 && last > first) return t.slice(first, last + 1);
-      return null;
-    };
+    const choice = aiData.choices?.[0];
 
-    const jsonStr = extractJson(scriptContent);
-    if (!jsonStr) {
-      throw new Error('AI did not return valid JSON');
+    // 1) Prefer structured tool call output
+    const toolArgs = choice?.message?.tool_calls?.[0]?.function?.arguments as string | undefined;
+    let script: { hook: string; body: string; cta: string };
+
+    if (toolArgs) {
+      script = JSON.parse(toolArgs);
+    } else {
+      // 2) Fallback to parsing text content
+      const scriptContent = choice?.message?.content as string | undefined;
+      if (!scriptContent) throw new Error('AI did not return any content');
+
+      // Robustly extract JSON from the AI response (handles code fences and extra text)
+      const extractJson = (text: string): string | null => {
+        const t = text.trim();
+        // 1) Prefer fenced code block ```json ... ```
+        const fenceMatch = t.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+        if (fenceMatch?.[1]) return fenceMatch[1];
+        // 2) Fallback: grab first JSON object delimited by braces
+        const first = t.indexOf('{');
+        const last = t.lastIndexOf('}');
+        if (first !== -1 && last !== -1 && last > first) return t.slice(first, last + 1);
+        return null;
+      };
+
+      const jsonStr = extractJson(scriptContent);
+      if (!jsonStr) throw new Error('AI did not return valid JSON');
+      script = JSON.parse(jsonStr);
     }
-
-    // Parse the JSON response
-    const script = JSON.parse(jsonStr);
 
     return new Response(
       JSON.stringify(script),
