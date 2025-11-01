@@ -1,1 +1,4 @@
 project_id = "gcqsililiievabrnxoak"
+
+[functions.reset-credits]
+verify_jwt = false
