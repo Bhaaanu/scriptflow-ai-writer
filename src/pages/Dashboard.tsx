@@ -13,6 +13,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { Sparkles, LogOut, Plus, Trash2 } from "lucide-react";
@@ -41,7 +42,6 @@ const Dashboard = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [scripts, setScripts] = useState<Script[]>([]);
   const [loading, setLoading] = useState(true);
-  const [scriptToDelete, setScriptToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -106,13 +106,11 @@ const Dashboard = () => {
     navigate("/");
   };
 
-  const handleDeleteScript = async () => {
-    if (!scriptToDelete) return;
-    
+  const handleDeleteScript = async (scriptId: string) => {
     const { error } = await supabase
       .from("scripts")
       .delete()
-      .eq("id", scriptToDelete);
+      .eq("id", scriptId);
 
     if (error) {
       toast.error("Failed to delete script");
@@ -120,7 +118,6 @@ const Dashboard = () => {
       toast.success("Script deleted");
       fetchScripts();
     }
-    setScriptToDelete(null);
   };
 
   if (loading) {
@@ -211,18 +208,27 @@ const Dashboard = () => {
                   <div key={script.id} className="border rounded-lg p-4 hover:bg-muted/50 transition-colors">
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="font-medium line-clamp-1">{script.prompt}</h3>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          console.log('Setting script to delete:', script.id);
-                          setScriptToDelete(script.id);
-                        }}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="ghost" size="icon">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will permanently delete your script.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleDeleteScript(script.id)}>
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                     <div className="space-y-2 text-sm">
                       <p className="text-muted-foreground">
@@ -245,34 +251,6 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </main>
-
-      <AlertDialog open={scriptToDelete !== null} onOpenChange={(open) => {
-        console.log('Dialog open state changed:', open, 'scriptToDelete:', scriptToDelete);
-        if (!open) setScriptToDelete(null);
-      }}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your script.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => {
-              console.log('Cancel clicked');
-              setScriptToDelete(null);
-            }}>
-              Cancel
-            </AlertDialogCancel>
-            <AlertDialogAction onClick={() => {
-              console.log('Delete confirmed for:', scriptToDelete);
-              handleDeleteScript();
-            }}>
-              Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>
   );
 };
