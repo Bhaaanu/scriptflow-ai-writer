@@ -214,7 +214,12 @@ const Dashboard = () => {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => setScriptToDelete(script.id)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log('Setting script to delete:', script.id);
+                          setScriptToDelete(script.id);
+                        }}
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -241,7 +246,10 @@ const Dashboard = () => {
         </Card>
       </main>
 
-      <AlertDialog open={!!scriptToDelete} onOpenChange={() => setScriptToDelete(null)}>
+      <AlertDialog open={scriptToDelete !== null} onOpenChange={(open) => {
+        console.log('Dialog open state changed:', open, 'scriptToDelete:', scriptToDelete);
+        if (!open) setScriptToDelete(null);
+      }}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
@@ -250,8 +258,16 @@ const Dashboard = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteScript}>
+            <AlertDialogCancel onClick={() => {
+              console.log('Cancel clicked');
+              setScriptToDelete(null);
+            }}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={() => {
+              console.log('Delete confirmed for:', scriptToDelete);
+              handleDeleteScript();
+            }}>
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
