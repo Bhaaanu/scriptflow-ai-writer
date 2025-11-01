@@ -4,6 +4,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { Sparkles, LogOut, Plus, Trash2 } from "lucide-react";
 import type { User, Session } from "@supabase/supabase-js";
@@ -31,6 +41,7 @@ const Dashboard = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [scripts, setScripts] = useState<Script[]>([]);
   const [loading, setLoading] = useState(true);
+  const [scriptToDelete, setScriptToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -95,11 +106,13 @@ const Dashboard = () => {
     navigate("/");
   };
 
-  const handleDeleteScript = async (scriptId: string) => {
+  const handleDeleteScript = async () => {
+    if (!scriptToDelete) return;
+    
     const { error } = await supabase
       .from("scripts")
       .delete()
-      .eq("id", scriptId);
+      .eq("id", scriptToDelete);
 
     if (error) {
       toast.error("Failed to delete script");
@@ -107,6 +120,7 @@ const Dashboard = () => {
       toast.success("Script deleted");
       fetchScripts();
     }
+    setScriptToDelete(null);
   };
 
   if (loading) {
@@ -200,7 +214,7 @@ const Dashboard = () => {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => handleDeleteScript(script.id)}
+                        onClick={() => setScriptToDelete(script.id)}
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -226,6 +240,23 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </main>
+
+      <AlertDialog open={!!scriptToDelete} onOpenChange={() => setScriptToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your script.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteScript}>
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
