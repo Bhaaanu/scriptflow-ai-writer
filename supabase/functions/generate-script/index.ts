@@ -91,17 +91,26 @@ Example output:
     const aiData = await lovableResponse.json();
     const scriptContent = aiData.choices[0].message.content;
     
-    // Strip markdown code blocks if present
-    let cleanedContent = scriptContent.trim();
-    if (cleanedContent.startsWith('```')) {
-      // Remove opening code block (```json or ```)
-      cleanedContent = cleanedContent.replace(/^```(?:json)?\n?/, '');
-      // Remove closing code block
-      cleanedContent = cleanedContent.replace(/\n?```$/, '');
+    // Robustly extract JSON from the AI response (handles code fences and extra text)
+    const extractJson = (text: string): string | null => {
+      const t = text.trim();
+      // 1) Prefer fenced code block ```json ... ```
+      const fenceMatch = t.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+      if (fenceMatch?.[1]) return fenceMatch[1];
+      // 2) Fallback: grab first JSON object delimited by braces
+      const first = t.indexOf('{');
+      const last = t.lastIndexOf('}');
+      if (first !== -1 && last !== -1 && last > first) return t.slice(first, last + 1);
+      return null;
+    };
+
+    const jsonStr = extractJson(scriptContent);
+    if (!jsonStr) {
+      throw new Error('AI did not return valid JSON');
     }
-    
+
     // Parse the JSON response
-    const script = JSON.parse(cleanedContent.trim());
+    const script = JSON.parse(jsonStr);
 
     return new Response(
       JSON.stringify(script),
