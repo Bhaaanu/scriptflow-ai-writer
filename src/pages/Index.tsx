@@ -84,7 +84,7 @@ const Index = () => {
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-card px-4 py-2 text-sm animate-fade-in">
               <span className="flex h-2 w-2 rounded-full bg-green-500" />
-              <span className="font-medium">5 Free Scripts • No Credit Card Required</span>
+              <span className="font-medium">10 Free Scripts • Resets Every 30 Min • No Credit Card</span>
             </div>
             <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight lg:text-7xl animate-fade-in" style={{ animationDelay: "100ms" }}>
               Create Viral Scripts
