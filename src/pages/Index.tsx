@@ -84,7 +84,7 @@ const Index = () => {
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-card px-4 py-2 text-sm animate-fade-in">
               <span className="flex h-2 w-2 rounded-full bg-green-500" />
-              <span className="font-medium">5 Free Scripts • No Credit Card Required</span>
+              <span className="font-medium">10 Free Scripts • Resets Every 30 Min • No Credit Card</span>
             </div>
             <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight lg:text-7xl animate-fade-in" style={{ animationDelay: "100ms" }}>
               Create Viral Scripts
@@ -114,7 +114,7 @@ const Index = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-primary" />
-                <span>5 free scripts</span>
+                <span>10 free scripts</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-primary" />
@@ -238,7 +238,7 @@ const Index = () => {
               <p className="mb-8 text-lg text-white/90">
                 Join thousands of creators using AI to write better scripts faster.
                 <br />
-                Start with 5 free scripts, no credit card required.
+                Start with 10 free scripts that reset every 30 minutes.
               </p>
               <Button size="lg" variant="secondary" onClick={() => navigate("/auth")} className="text-base shadow-xl">
                 <Sparkles className="mr-2 h-5 w-5" />
