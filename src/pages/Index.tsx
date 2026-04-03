@@ -238,7 +238,7 @@ const Index = () => {
               <p className="mb-8 text-lg text-white/90">
                 Join thousands of creators using AI to write better scripts faster.
                 <br />
-                Start with 5 free scripts, no credit card required.
+                Start with 10 free scripts that reset every 30 minutes.
               </p>
               <Button size="lg" variant="secondary" onClick={() => navigate("/auth")} className="text-base shadow-xl">
                 <Sparkles className="mr-2 h-5 w-5" />
