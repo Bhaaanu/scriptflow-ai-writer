@@ -400,13 +400,15 @@ interface PromptInputActionProps extends React.ComponentProps<typeof Tooltip> {
   tooltip: React.ReactNode;
   children: React.ReactNode;
   side?: "top" | "bottom" | "left" | "right";
+  className?: string;
 }
 const PromptInputAction: React.FC<PromptInputActionProps> = ({
   tooltip,
   children,
+  className,
   side = "top",
   ...props
-}: PromptInputActionProps) => {
+}) => {
   const { disabled } = usePromptInput();
   return (
     <Tooltip {...props}>
