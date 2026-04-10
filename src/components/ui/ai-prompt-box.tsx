@@ -172,7 +172,7 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   visualizerBars = 32,
 }) => {
   const [time, setTime] = React.useState(0);
-  const timerRef = React.useRef<NodeJS.Timeout | null>(null);
+  const timerRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
 
   React.useEffect(() => {
     if (isRecording) {
@@ -404,10 +404,9 @@ interface PromptInputActionProps extends React.ComponentProps<typeof Tooltip> {
 const PromptInputAction: React.FC<PromptInputActionProps> = ({
   tooltip,
   children,
-  className,
   side = "top",
   ...props
-}) => {
+}: PromptInputActionProps) => {
   const { disabled } = usePromptInput();
   return (
     <Tooltip {...props}>
