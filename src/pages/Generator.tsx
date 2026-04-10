@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { PromptInputBox } from "@/components/ui/ai-prompt-box";
 import { toast } from "sonner";
 import { Sparkles, ArrowLeft, Copy, Save } from "lucide-react";
 import type { User, Session } from "@supabase/supabase-js";
@@ -120,44 +120,44 @@ const Generator = () => {
       </header>
 
       <main className="container mx-auto px-4 py-8 max-w-4xl">
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>What do you want to create?</CardTitle>
-            <CardDescription>
-              Describe your video idea and we'll generate a complete script with hook, body, and CTA
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Textarea
-              placeholder="E.g., I want to promote my new coffee brand with a fun TikTok script..."
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              rows={4}
-              className="resize-none"
-              maxLength={500}
-            />
-            <p className="text-xs text-muted-foreground text-right">
-              {prompt.length}/500 characters
-            </p>
-            <Button
-              onClick={generateScript}
-              disabled={generating || !prompt.trim()}
-              className="w-full"
-            >
-              {generating ? (
-                <>
-                  <Sparkles className="h-4 w-4 mr-2 animate-spin" />
-                  Generating...
-                </>
-              ) : (
-                <>
-                  <Sparkles className="h-4 w-4 mr-2" />
-                  Generate Script
-                </>
-              )}
-            </Button>
-          </CardContent>
-        </Card>
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold text-foreground mb-1">What do you want to create?</h2>
+          <p className="text-sm text-muted-foreground mb-4">
+            Describe your video idea and we'll generate a complete script with hook, body, and CTA
+          </p>
+          <PromptInputBox
+            placeholder="E.g., I want to promote my new coffee brand with a fun TikTok script..."
+            isLoading={generating}
+            onSend={(message) => {
+              setPrompt(message);
+              const trimmedPrompt = message.trim();
+              if (!trimmedPrompt) {
+                toast.error("Please enter a prompt");
+                return;
+              }
+              if (trimmedPrompt.length < 10) {
+                toast.error("Prompt must be at least 10 characters");
+                return;
+              }
+              if (trimmedPrompt.length > 500) {
+                toast.error("Prompt must be less than 500 characters");
+                return;
+              }
+              setGenerating(true);
+              supabase.functions.invoke("generate-script", {
+                body: { prompt: trimmedPrompt }
+              }).then(({ data, error }) => {
+                if (error) {
+                  toast.error(error.message || "Failed to generate script");
+                } else {
+                  setScript(data);
+                  toast.success("Script generated!");
+                }
+                setGenerating(false);
+              });
+            }}
+          />
+        </div>
 
         {script && (
           <Card>
