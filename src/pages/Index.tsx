@@ -110,16 +110,28 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5" />
+        {/* Animated background blobs */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-primary/20 blur-3xl animate-blob" />
+          <div className="absolute top-1/3 -right-24 h-96 w-96 rounded-full bg-secondary/20 blur-3xl animate-blob" style={{ animationDelay: "2s" }} />
+          <div className="absolute -bottom-24 left-1/3 h-96 w-96 rounded-full bg-accent/20 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
+        </div>
         <div className="container relative mx-auto px-4 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-card px-4 py-2 text-sm animate-fade-in">
-              <span className="flex h-2 w-2 rounded-full bg-green-500" />
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-card px-4 py-2 text-sm animate-fade-in hover:scale-105 transition-transform shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+              </span>
               <span className="font-medium">10 Free Scripts • Resets Every 30 Min • No Credit Card</span>
             </div>
             <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight lg:text-7xl animate-fade-in" style={{ animationDelay: "100ms" }}>
               Create Viral Scripts
               <br />
-              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              <span
+                className="inline-block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-shift"
+                style={{ backgroundSize: "200% 200%" }}
+              >
                 in Seconds
               </span>
             </h1>
@@ -129,24 +141,24 @@ const Index = () => {
               From hook to CTA, we've got you covered.
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center animate-fade-in" style={{ animationDelay: "300ms" }}>
-              <Button size="lg" onClick={() => navigate("/auth")} className="group text-base">
+              <Button size="lg" onClick={() => navigate("/auth")} className="group text-base hover:scale-105 transition-transform shadow-md hover:shadow-lg">
                 Get Started Free
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => navigate("/auth")}>
+              <Button size="lg" variant="outline" onClick={() => navigate("/auth")} className="hover:scale-105 transition-transform">
                 View Demo
               </Button>
             </div>
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: "400ms" }}>
+              <div className="flex items-center gap-2 hover:text-foreground transition-colors">
                 <Check className="h-4 w-4 text-primary" />
                 <span>No credit card</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 hover:text-foreground transition-colors">
                 <Check className="h-4 w-4 text-primary" />
                 <span>10 free scripts</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 hover:text-foreground transition-colors">
                 <Check className="h-4 w-4 text-primary" />
                 <span>Cancel anytime</span>
               </div>
