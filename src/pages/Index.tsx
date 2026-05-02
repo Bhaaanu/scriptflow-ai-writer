@@ -88,8 +88,8 @@ const Index = () => {
               <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Features
               </a>
-              <a href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                Pricing
+              <a href="#examples" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Examples
               </a>
               <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 About us
@@ -418,13 +418,13 @@ const Index = () => {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><a href="#" className="hover:text-foreground transition-colors">Features</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Examples</a></li>
+                <li><a href="#examples" className="hover:text-foreground transition-colors">Examples</a></li>
               </ul>
             </div>
             <div>
               <h3 className="mb-4 font-semibold">Company</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">About</a></li>
+                <li><a href="#about" className="hover:text-foreground transition-colors">About</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Blog</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
               </ul>
