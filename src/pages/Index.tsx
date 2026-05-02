@@ -1,10 +1,24 @@
 import { useNavigate } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Zap, MessageSquare, TrendingUp, ArrowRight, Check, Coffee, Dumbbell, ShoppingBag, Target, Users, Rocket } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const wordY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const wordScale = useTransform(scrollYProgress, [0, 1], [1, 1.6]);
+  const wordOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const wordRotate = useTransform(scrollYProgress, [0, 1], [0, -8]);
+  const wordX = useTransform(scrollYProgress, [0, 1], [0, -60]);
+
+  const letters = "in Seconds".split("");
 
   const features = [
     {
