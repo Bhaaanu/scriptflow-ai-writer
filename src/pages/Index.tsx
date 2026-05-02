@@ -122,7 +122,7 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32">
+      <section ref={heroRef} className="relative overflow-hidden py-20 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5" />
         {/* Animated background blobs */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -142,12 +142,37 @@ const Index = () => {
             <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight lg:text-7xl animate-fade-in" style={{ animationDelay: "100ms" }}>
               Create Viral Scripts
               <br />
-              <span
-                className="inline-block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-shift"
-                style={{ backgroundSize: "200% 200%" }}
+              <motion.span
+                style={{
+                  y: wordY,
+                  x: wordX,
+                  scale: wordScale,
+                  opacity: wordOpacity,
+                  rotate: wordRotate,
+                  backgroundSize: "200% 200%",
+                  display: "inline-block",
+                  transformOrigin: "center",
+                }}
+                className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-shift"
               >
-                in Seconds
-              </span>
+                {letters.map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 40, rotateX: -90 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: 0.4 + i * 0.05,
+                      duration: 0.5,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="inline-block"
+                    style={{ whiteSpace: "pre" }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </motion.span>
             </h1>
             <p className="mb-10 text-lg text-muted-foreground lg:text-xl animate-fade-in" style={{ animationDelay: "200ms" }}>
               AI-powered script generation for TikTok, YouTube Shorts, and Reels.
