@@ -12,11 +12,6 @@ import avatar6 from "@/assets/marketeam/avatar-6.png.asset.json";
 import avatar7 from "@/assets/marketeam/avatar-7.png.asset.json";
 import avatar8 from "@/assets/marketeam/avatar-8.png.asset.json";
 import avatar9 from "@/assets/marketeam/avatar-9.png.asset.json";
-import partner1 from "@/assets/marketeam/partner-1.svg.asset.json";
-import partner2 from "@/assets/marketeam/partner-2.svg.asset.json";
-import partner3 from "@/assets/marketeam/partner-3.svg.asset.json";
-import partner4 from "@/assets/marketeam/partner-4.svg.asset.json";
-import partner5 from "@/assets/marketeam/partner-5.svg.asset.json";
 
 const headline = "Turn one idea into a script people can't scroll past.";
 
@@ -69,7 +64,7 @@ function useCountUp(target: number, delay = 1200, duration = 2000) {
 }
 
 const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9];
-const partners = [partner1, partner2, partner3, partner4, partner5];
+const platforms = ["TikTok", "Instagram Reels", "YouTube Shorts", "LinkedIn", "Facebook", "X / Twitter"];
 
 const Index = () => {
   const navigate = useNavigate();
@@ -152,8 +147,8 @@ const Index = () => {
         <p>Write for</p>
         <div className="sf-ticker-window">
           <div className="sf-ticker-track">
-            {[...partners, ...partners, ...partners, ...partners].map((partner, index) => (
-              <img src={partner.url} alt="" key={`${partner.asset_id}-${index}`} />
+            {[...platforms, ...platforms, ...platforms, ...platforms].map((platform, index) => (
+              <span key={`${platform}-${index}`}>{platform}</span>
             ))}
           </div>
         </div>
