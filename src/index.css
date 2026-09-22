@@ -157,7 +157,8 @@ All colors MUST be HSL.
   }
 
   .sf-header {
-    width: min(100%, 1920px);
+    width: 100%;
+    max-width: 1920px;
     margin-inline: auto;
     min-height: 88px;
     padding: 24px 64px;
@@ -184,13 +185,13 @@ All colors MUST be HSL.
 
   .sf-border-wrap { position: relative; display: inline-flex; padding: 2px; border-radius: 999px; overflow: hidden; isolation: isolate; }
   .sf-border-wrap::before { content: ""; position: absolute; inset: -100%; z-index: -1; background: conic-gradient(from var(--border-angle), hsl(var(--landing-accent)), hsl(var(--landing-dark)), hsl(var(--landing-accent)), hsl(var(--landing-dark)), hsl(var(--landing-accent))); animation: sf-border-spin 3s linear infinite; }
-  .sf-pill { position: relative; overflow: hidden; border-radius: 999px; background: hsl(var(--landing-dark)); color: hsl(var(--landing-light)); height: auto; letter-spacing: 0; }
-  .sf-pill::after { content: ""; position: absolute; inset: 0; background: hsl(var(--landing-accent)); transform: translateX(-102%); transition: transform .4s cubic-bezier(.22, 1, .36, 1); }
+  .sf-pill { position: relative; overflow: hidden; isolation: isolate; border-radius: 999px; background: hsl(var(--landing-dark)); color: hsl(var(--landing-light)); height: auto; letter-spacing: 0; }
+  .sf-pill::after { content: ""; position: absolute; inset: 0; z-index: -1; background: hsl(var(--landing-accent)); transform: translateX(-102%); transition: transform .4s cubic-bezier(.22, 1, .36, 1); }
   .sf-pill:hover::after { transform: translateX(0); }
   .sf-pill > * { position: relative; z-index: 1; }
   .sf-join { padding: 11px 25px; }
 
-  .sf-hero { width: min(100%, 1920px); margin-inline: auto; padding: 18px 64px 20px; display: grid; grid-template-columns: minmax(430px, 620px) minmax(500px, 1fr); align-items: center; gap: 12px; min-height: 610px; }
+  .sf-hero { width: 100%; max-width: 1920px; margin-inline: auto; padding: 18px 64px 20px; display: grid; grid-template-columns: minmax(430px, 620px) minmax(500px, 1fr); align-items: center; gap: 12px; min-height: 610px; }
   .sf-copy { position: relative; z-index: 5; padding-top: 24px; animation: sf-fade-up 1s cubic-bezier(.22, 1, .36, 1) both; }
   .sf-kicker { display: flex; align-items: center; gap: 9px; margin-bottom: 21px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
   .sf-kicker span { width: 7px; height: 7px; border-radius: 50%; background: hsl(var(--landing-accent)); box-shadow: 0 0 0 6px hsl(var(--landing-accent) / .16); }
