@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Menu, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import backgroundAsset from "@/assets/marketeam/background.webp.asset.json";
 import avatar1 from "@/assets/marketeam/avatar-1.png.asset.json";
 import avatar2 from "@/assets/marketeam/avatar-2.png.asset.json";
 import avatar3 from "@/assets/marketeam/avatar-3.png.asset.json";
@@ -72,7 +71,7 @@ const Index = () => {
   const count = useCountUp(10);
 
   return (
-    <main className="sf-landing" style={{ backgroundImage: `url(${backgroundAsset.url})` }}>
+    <main className="sf-landing">
       <header className="sf-header">
         <a href="#top" className="sf-brand" aria-label="ScriptFlow home">
           <span className="sf-brand-mark"><Sparkles aria-hidden="true" /></span>
