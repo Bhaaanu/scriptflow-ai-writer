@@ -8,8 +8,8 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 240 33% 98%;
-    --foreground: 249 74% 5%;
+    --background: 86 30% 95%;
+    --foreground: 102 18% 8%;
 
     --card: 0 0% 100%;
     --card-foreground: 220 20% 12%;
@@ -17,9 +17,9 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 12%;
 
-    --primary: 263 100% 70%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 281 100% 81%;
+    --primary: 103 29% 37%;
+    --primary-foreground: 86 30% 95%;
+    --primary-glow: 95 27% 70%;
 
     --secondary: 44 100% 74%;
     --secondary-foreground: 0 0% 100%;
@@ -27,25 +27,25 @@ All colors MUST be HSL.
     --muted: 220 15% 96%;
     --muted-foreground: 220 10% 45%;
 
-    --accent: 263 100% 70%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 103 29% 37%;
+    --accent-foreground: 86 30% 95%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 260 24% 85%;
-    --input: 260 24% 85%;
-    --ring: 263 100% 70%;
+    --border: 95 18% 78%;
+    --input: 95 18% 78%;
+    --ring: 103 29% 37%;
 
     --radius: 0.5rem;
 
-    --landing-dark: 249 74% 5%;
-    --landing-light: 0 0% 100%;
-    --landing-accent: 263 100% 70%;
-    --landing-accent-soft: 281 100% 81%;
-    --landing-warm: 43 100% 78%;
-    --landing-glass: 249 74% 5% / 0.14;
-    --landing-line: 281 100% 81% / 0.72;
+    --landing-dark: 102 18% 8%;
+    --landing-light: 86 30% 95%;
+    --landing-accent: 103 29% 37%;
+    --landing-accent-soft: 95 27% 70%;
+    --landing-warm: 79 35% 72%;
+    --landing-glass: 102 18% 8% / 0.14;
+    --landing-line: 95 27% 70% / 0.55;
 
     --gradient-primary: linear-gradient(135deg, hsl(220 70% 50%), hsl(220 70% 60%));
     --gradient-secondary: linear-gradient(135deg, hsl(16 100% 66%), hsl(30 100% 70%));
@@ -125,7 +125,7 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
     margin: 0;
     min-width: 320px;
-    font-family: "Inter", sans-serif;
+    font-family: "Manrope", sans-serif;
   }
 }
 
@@ -149,9 +149,10 @@ All colors MUST be HSL.
   .sf-landing {
     min-height: 100svh;
     overflow: hidden;
-    background-position: center;
-    background-size: cover;
-    color: hsl(var(--landing-dark));
+    background:
+      radial-gradient(circle at 78% 44%, hsl(var(--landing-accent) / .2), transparent 34%),
+      linear-gradient(155deg, hsl(var(--landing-dark)) 0%, hsl(110 21% 11%) 56%, hsl(103 29% 20%) 100%);
+    color: hsl(var(--landing-light));
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto 1fr auto;
@@ -174,11 +175,11 @@ All colors MUST be HSL.
   }
 
   .sf-brand, .sf-nav, .sf-header-actions { display: flex; align-items: center; }
-  .sf-brand { gap: 10px; font: 700 22px/1 "Urbanist", sans-serif; }
-  .sf-brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: hsl(var(--landing-dark)); color: hsl(var(--landing-light)); }
+  .sf-brand { gap: 10px; font: 700 22px/1 "Sora", sans-serif; }
+  .sf-brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: hsl(var(--landing-accent)); color: hsl(var(--landing-light)); }
   .sf-brand-mark svg { width: 18px; }
   .sf-nav { gap: 32px; margin-right: auto; margin-left: 36px; }
-  .sf-nav a { position: relative; font-size: 15px; }
+  .sf-nav a { position: relative; color: hsl(var(--landing-light) / .78); font-size: 15px; }
   .sf-nav a::after, .sf-login::after { content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
   .sf-nav a:hover::after, .sf-login:hover::after { transform: scaleX(1); }
   .sf-header-actions { gap: 14px; }
@@ -186,7 +187,7 @@ All colors MUST be HSL.
   .sf-menu { display: none; color: hsl(var(--landing-light)); }
 
   .sf-border-wrap { position: relative; display: inline-flex; padding: 2px; border-radius: 999px; overflow: hidden; isolation: isolate; }
-  .sf-border-wrap::before { content: ""; position: absolute; inset: -100%; z-index: -1; background: conic-gradient(from var(--border-angle), hsl(var(--landing-accent)), hsl(var(--landing-dark)), hsl(var(--landing-accent)), hsl(var(--landing-dark)), hsl(var(--landing-accent))); animation: sf-border-spin 3s linear infinite; }
+  .sf-border-wrap::before { content: ""; position: absolute; inset: -100%; z-index: -1; background: conic-gradient(from var(--border-angle), hsl(var(--landing-accent-soft)), hsl(var(--landing-dark)), hsl(var(--landing-accent)), hsl(var(--landing-dark)), hsl(var(--landing-accent-soft))); animation: sf-border-spin 3s linear infinite; }
   .sf-pill { position: relative; overflow: hidden; isolation: isolate; border-radius: 999px; background: hsl(var(--landing-dark)); color: hsl(var(--landing-light)); height: auto; letter-spacing: 0; }
   .sf-pill::after { content: ""; position: absolute; inset: 0; z-index: -1; background: hsl(var(--landing-accent)); transform: translateX(-102%); transition: transform .4s cubic-bezier(.22, 1, .36, 1); }
   .sf-pill:hover::after { transform: translateX(0); }
@@ -197,9 +198,9 @@ All colors MUST be HSL.
   .sf-copy { position: relative; z-index: 5; padding-top: 24px; animation: sf-fade-up 1s cubic-bezier(.22, 1, .36, 1) both; }
   .sf-kicker { display: flex; align-items: center; gap: 9px; margin-bottom: 21px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
   .sf-kicker span { width: 7px; height: 7px; border-radius: 50%; background: hsl(var(--landing-accent)); box-shadow: 0 0 0 6px hsl(var(--landing-accent) / .16); }
-  .sf-copy h1 { min-height: 256px; max-width: 620px; margin: 0; font: 600 64px/1 "Urbanist", sans-serif; letter-spacing: 0; text-wrap: balance; }
-  .sf-heading-dark { color: hsl(var(--landing-dark)); }
-  .sf-heading-light { color: hsl(var(--landing-light)); }
+  .sf-copy h1 { min-height: 256px; max-width: 620px; margin: 0; font: 600 64px/1 "Sora", sans-serif; letter-spacing: 0; text-wrap: balance; }
+  .sf-heading-dark { color: hsl(var(--landing-light)); }
+  .sf-heading-light { color: hsl(var(--landing-accent-soft)); }
   .sf-caret { display: inline-block; width: 4px; height: .85em; margin-left: 5px; vertical-align: -.08em; background: hsl(var(--landing-accent)); animation: sf-caret .8s step-end infinite; }
   .sf-subcopy { max-width: 520px; margin: 22px 0 27px; color: hsl(var(--landing-light) / .82); font-size: 16px; line-height: 1.65; }
   .sf-cta-row { display: flex; align-items: center; gap: 22px; opacity: 0; transform: translateY(16px); transition: opacity .7s, transform .7s; }
@@ -223,8 +224,8 @@ All colors MUST be HSL.
   .sf-orbit-3 { width: 649px; height: 649px; animation: sf-ring-right 50s linear infinite; }
   .sf-orbit-4 { width: 797px; height: 797px; animation: sf-ring-left 60s linear infinite; }
   .sf-center-stat { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: hsl(var(--landing-light)); animation: sf-ring-right 30s linear infinite; text-align: center; }
-  .sf-center-stat strong { font: 600 74px/.85 "Urbanist", sans-serif; }
-  .sf-center-stat span { margin-top: 13px; font: 700 17px/1 "Urbanist", sans-serif; }
+  .sf-center-stat strong { font: 600 74px/.85 "Sora", sans-serif; }
+  .sf-center-stat span { margin-top: 13px; font: 700 17px/1 "Sora", sans-serif; }
   .sf-center-stat small { margin-top: 6px; color: hsl(var(--landing-light) / .6); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
   .sf-avatar { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; padding: 4px; border-radius: 50%; background: hsl(var(--landing-light) / .23); backdrop-filter: blur(10px); opacity: 0; animation: sf-avatar-in .9s cubic-bezier(.22, 1, .36, 1) forwards; }
   .sf-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
@@ -242,7 +243,7 @@ All colors MUST be HSL.
   .sf-ticker > p { flex: none; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
   .sf-ticker-window { overflow: hidden; flex: 1; mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent); }
   .sf-ticker-track { display: flex; width: max-content; gap: 64px; align-items: center; animation: sf-ticker 20s linear infinite; }
-  .sf-ticker-track span { min-width: 146px; color: hsl(var(--landing-light) / .78); font: 700 18px/1 "Urbanist", sans-serif; text-align: center; white-space: nowrap; }
+  .sf-ticker-track span { min-width: 146px; color: hsl(var(--landing-light) / .78); font: 700 18px/1 "Sora", sans-serif; text-align: center; white-space: nowrap; }
 }
 
 @media (max-width: 1280px) {
