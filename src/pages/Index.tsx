@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Menu, Sparkles } from "lucide-react";
+import {
+  siFacebook,
+  siInstagram,
+  siLinkedin,
+  siPinterest,
+  siSnapchat,
+  siThreads,
+  siTiktok,
+  siX,
+  siYoutube,
+} from "simple-icons/icons";
 import { Button } from "@/components/ui/button";
-import avatar1 from "@/assets/marketeam/avatar-1.png.asset.json";
-import avatar2 from "@/assets/marketeam/avatar-2.png.asset.json";
-import avatar3 from "@/assets/marketeam/avatar-3.png.asset.json";
-import avatar4 from "@/assets/marketeam/avatar-4.png.asset.json";
-import avatar5 from "@/assets/marketeam/avatar-5.png.asset.json";
-import avatar6 from "@/assets/marketeam/avatar-6.png.asset.json";
-import avatar7 from "@/assets/marketeam/avatar-7.png.asset.json";
-import avatar8 from "@/assets/marketeam/avatar-8.png.asset.json";
-import avatar9 from "@/assets/marketeam/avatar-9.png.asset.json";
 
 const headline = "Turn one idea into a script people can't scroll past.";
 
@@ -62,7 +64,7 @@ function useCountUp(target: number, delay = 1200, duration = 2000) {
   return count;
 }
 
-const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9];
+const socialApps = [siTiktok, siInstagram, siYoutube, siLinkedin, siFacebook, siX, siThreads, siPinterest, siSnapchat];
 const platforms = ["TikTok", "Instagram Reels", "YouTube Shorts", "LinkedIn", "Facebook", "X / Twitter"];
 
 const Index = () => {
@@ -121,7 +123,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="sf-visual" aria-label="Creators using ScriptFlow">
+        <div className="sf-visual" aria-label="Social platforms supported by ScriptFlow">
           <div className="sf-orbit-stage">
             <div className="sf-orbit sf-orbit-4" />
             <div className="sf-orbit sf-orbit-3" />
@@ -133,9 +135,11 @@ const Index = () => {
                 <small>every 30 min</small>
               </div>
             </div>
-            {avatars.map((avatar, index) => (
-              <div className={`sf-avatar sf-avatar-${index + 1}`} key={avatar.asset_id}>
-                <img src={avatar.url} alt="" />
+            {socialApps.map((app, index) => (
+              <div className={`sf-social sf-social-${index + 1}`} key={app.slug}>
+                <svg viewBox="0 0 24 24" role="img" aria-label={app.title}>
+                  <path d={app.path} />
+                </svg>
               </div>
             ))}
           </div>
