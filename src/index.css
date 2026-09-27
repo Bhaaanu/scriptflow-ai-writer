@@ -255,7 +255,8 @@ All colors MUST be HSL.
 @media (max-width: 1024px) {
   .sf-landing { min-height: 100svh; overflow-y: auto; }
   .sf-header { min-height: 76px; padding: 18px 32px; }
-  .sf-nav { gap: 20px; margin-left: 20px; }
+  .sf-nav { display: none; }
+  .sf-menu { display: inline-flex; width: 42px; height: 42px; border: 1px solid hsl(var(--landing-light) / .16); border-radius: 50%; }
   .sf-hero {
     padding: 48px 32px 0;
     display: flex;
@@ -269,7 +270,14 @@ All colors MUST be HSL.
   .sf-subcopy { max-width: 600px; margin-block: 18px 24px; }
   .sf-cursor-note { display: none; }
   .sf-visual { width: 100%; height: 430px; margin-top: -16px; overflow: hidden; }
-  .sf-orbit-stage { flex: none; transform: scale(.53); }
+  .sf-orbit-stage { flex: none; width: 400px; height: 400px; transform: none; }
+  .sf-orbit-1 { width: 176px; height: 176px; }
+  .sf-orbit-2 { width: 250px; height: 250px; }
+  .sf-orbit-3 { width: 324px; height: 324px; }
+  .sf-orbit-4 { width: 398px; height: 398px; }
+  .sf-center-stat strong { font-size: 48px; }
+  .sf-center-stat span { font-size: 13px; }
+  .sf-avatar { display: none; }
   .sf-ticker { min-height: 76px; padding: 12px 32px 18px; }
 }
 
@@ -278,8 +286,6 @@ All colors MUST be HSL.
   .sf-brand { font-size: 19px; }
   .sf-brand-mark { width: 36px; height: 36px; }
   .sf-nav, .sf-login, .sf-join-wrap { display: none; }
-  .sf-menu { display: inline-flex; }
-  .sf-menu { width: 42px; height: 42px; border: 1px solid hsl(var(--landing-light) / .16); border-radius: 50%; }
   .sf-hero { padding: 34px 20px 0; gap: 12px; }
   .sf-copy { width: 100%; }
   .sf-kicker { margin-bottom: 18px; font-size: 10px; line-height: 1.4; letter-spacing: .08em; }
@@ -290,7 +296,14 @@ All colors MUST be HSL.
   .sf-credit-note { font-size: 10px; }
   .sf-credit-note strong { font-size: 12px; }
   .sf-visual { height: 330px; margin-top: 0; }
-  .sf-orbit-stage { transform: scale(.4); }
+  .sf-orbit-stage { width: 300px; height: 300px; }
+  .sf-orbit-1 { width: 132px; height: 132px; }
+  .sf-orbit-2 { width: 188px; height: 188px; }
+  .sf-orbit-3 { width: 244px; height: 244px; }
+  .sf-orbit-4 { width: 298px; height: 298px; }
+  .sf-center-stat strong { font-size: 40px; }
+  .sf-center-stat span { margin-top: 8px; font-size: 12px; }
+  .sf-center-stat small { font-size: 9px; }
   .sf-ticker { min-height: 68px; padding: 10px 20px 16px; gap: 16px; }
   .sf-ticker > p { display: none; }
   .sf-ticker-track { gap: 42px; }
@@ -305,7 +318,11 @@ All colors MUST be HSL.
   .sf-cta-row { justify-content: space-between; gap: 10px; }
   .sf-credit-note { max-width: 112px; }
   .sf-visual { height: 300px; }
-  .sf-orbit-stage { transform: scale(.36); }
+  .sf-orbit-stage { width: 280px; height: 280px; }
+  .sf-orbit-1 { width: 124px; height: 124px; }
+  .sf-orbit-2 { width: 176px; height: 176px; }
+  .sf-orbit-3 { width: 228px; height: 228px; }
+  .sf-orbit-4 { width: 278px; height: 278px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

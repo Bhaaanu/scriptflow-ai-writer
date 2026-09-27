@@ -4,4 +4,4 @@
 - [x] Preserve ScriptFlow’s product identity, credit policy, authentication, and existing app routes.
 - [x] Replace the company-logo ticker with social media platform names.
 - [x] Verify desktop and mobile presentation, interactions, and preview health.
-- [ ] Replace purple with Fern Green and perfect the tablet and mobile landing layouts.
+- [x] Replace purple with Fern Green and perfect the tablet and mobile landing layouts.
