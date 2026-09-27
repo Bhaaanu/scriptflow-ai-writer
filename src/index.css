@@ -142,7 +142,7 @@ All colors MUST be HSL.
 @keyframes sf-caret { 50% { opacity: 0; } }
 @keyframes sf-ring-left { to { transform: translate(-50%, -50%) rotate(-360deg); } }
 @keyframes sf-ring-right { to { transform: translate(-50%, -50%) rotate(360deg); } }
-@keyframes sf-avatar-in { from { opacity: 0; filter: blur(12px); transform: translate(-50%, -50%) scale(.3) rotate(-180deg); } to { opacity: 1; filter: blur(0); } }
+@keyframes sf-social-in { from { opacity: 0; filter: blur(12px); } to { opacity: 1; filter: blur(0); } }
 @keyframes sf-ticker { to { transform: translateX(-25%); } }
 
 @layer components {
@@ -227,17 +227,17 @@ All colors MUST be HSL.
   .sf-center-stat strong { font: 600 74px/.85 "Sora", sans-serif; }
   .sf-center-stat span { margin-top: 13px; font: 700 17px/1 "Sora", sans-serif; }
   .sf-center-stat small { margin-top: 6px; color: hsl(var(--landing-light) / .6); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
-  .sf-avatar { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; padding: 4px; border-radius: 50%; background: hsl(var(--landing-light) / .23); backdrop-filter: blur(10px); opacity: 0; animation: sf-avatar-in .9s cubic-bezier(.22, 1, .36, 1) forwards; }
-  .sf-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
-  .sf-avatar-1 { transform: translate(-50%, -50%) rotate(270deg) translateX(177px) rotate(-270deg); border-radius: 19px; box-shadow: 0 0 32px hsl(var(--landing-accent) / .7); animation-delay: .6s; }
-  .sf-avatar-2 { transform: translate(-50%, -50%) rotate(60deg) translateX(251px) rotate(-60deg); box-shadow: 0 0 30px hsl(var(--landing-warm) / .7); animation-delay: .8s; }
-  .sf-avatar-3 { width: 78px; height: 78px; transform: translate(-50%, -50%) rotate(180deg) translateX(251px) rotate(-180deg); box-shadow: 0 0 34px hsl(var(--landing-accent-soft) / .68); animation-delay: 1s; }
-  .sf-avatar-4 { transform: translate(-50%, -50%) rotate(300deg) translateX(251px) rotate(-300deg); border-radius: 19px; box-shadow: 0 0 30px hsl(var(--primary-glow) / .7); animation-delay: 1.2s; }
-  .sf-avatar-5 { width: 88px; height: 88px; transform: translate(-50%, -50%) rotate(130deg) translateX(325px) rotate(-130deg); box-shadow: 0 0 34px hsl(var(--landing-accent-soft) / .7); animation-delay: 1.4s; }
-  .sf-avatar-6 { transform: translate(-50%, -50%) rotate(30deg) translateX(399px) rotate(-30deg); box-shadow: 0 0 30px hsl(var(--landing-accent) / .7); animation-delay: 1.6s; }
-  .sf-avatar-7 { width: 88px; height: 88px; transform: translate(-50%, -50%) rotate(95deg) translateX(399px) rotate(-95deg); border-radius: 24px; box-shadow: 0 0 32px hsl(var(--landing-warm) / .7); animation-delay: 1.8s; }
-  .sf-avatar-8 { width: 88px; height: 88px; transform: translate(-50%, -50%) rotate(220deg) translateX(399px) rotate(-220deg); border-radius: 24px; box-shadow: 0 0 32px hsl(var(--landing-accent-soft) / .7); animation-delay: 2s; }
-  .sf-avatar-9 { transform: translate(-50%, -50%) rotate(320deg) translateX(399px) rotate(-320deg); box-shadow: 0 0 30px hsl(var(--landing-accent) / .7); animation-delay: 2.2s; }
+  .sf-social { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; padding: 16px; border: 1px solid hsl(var(--landing-light) / .18); border-radius: 18px; background: hsl(var(--landing-light) / .92); color: hsl(var(--landing-dark)); backdrop-filter: blur(10px); box-shadow: 0 12px 34px hsl(var(--landing-dark) / .28); opacity: 0; animation: sf-social-in .9s cubic-bezier(.22, 1, .36, 1) forwards; }
+  .sf-social svg { display: block; width: 100%; height: 100%; fill: currentColor; }
+  .sf-social-1 { transform: translate(-50%, -50%) rotate(270deg) translateX(177px) rotate(-270deg); box-shadow: 0 0 32px hsl(var(--landing-accent) / .7); animation-delay: .6s; }
+  .sf-social-2 { transform: translate(-50%, -50%) rotate(60deg) translateX(251px) rotate(-60deg); border-radius: 50%; box-shadow: 0 0 30px hsl(var(--landing-warm) / .7); animation-delay: .8s; }
+  .sf-social-3 { width: 78px; height: 78px; padding: 19px; transform: translate(-50%, -50%) rotate(180deg) translateX(251px) rotate(-180deg); box-shadow: 0 0 34px hsl(var(--landing-accent-soft) / .68); animation-delay: 1s; }
+  .sf-social-4 { transform: translate(-50%, -50%) rotate(300deg) translateX(251px) rotate(-300deg); box-shadow: 0 0 30px hsl(var(--primary-glow) / .7); animation-delay: 1.2s; }
+  .sf-social-5 { width: 82px; height: 82px; padding: 20px; transform: translate(-50%, -50%) rotate(130deg) translateX(325px) rotate(-130deg); border-radius: 50%; box-shadow: 0 0 34px hsl(var(--landing-accent-soft) / .7); animation-delay: 1.4s; }
+  .sf-social-6 { transform: translate(-50%, -50%) rotate(30deg) translateX(399px) rotate(-30deg); box-shadow: 0 0 30px hsl(var(--landing-accent) / .7); animation-delay: 1.6s; }
+  .sf-social-7 { width: 82px; height: 82px; padding: 20px; transform: translate(-50%, -50%) rotate(95deg) translateX(399px) rotate(-95deg); box-shadow: 0 0 32px hsl(var(--landing-warm) / .7); animation-delay: 1.8s; }
+  .sf-social-8 { width: 82px; height: 82px; padding: 20px; transform: translate(-50%, -50%) rotate(220deg) translateX(399px) rotate(-220deg); border-radius: 50%; box-shadow: 0 0 32px hsl(var(--landing-accent-soft) / .7); animation-delay: 2s; }
+  .sf-social-9 { transform: translate(-50%, -50%) rotate(320deg) translateX(399px) rotate(-320deg); box-shadow: 0 0 30px hsl(var(--landing-accent) / .7); animation-delay: 2.2s; }
 
   .sf-ticker { min-width: 0; min-height: 92px; padding: 16px 64px 20px; display: flex; align-items: center; gap: 34px; color: hsl(var(--landing-light) / .65); animation: sf-fade-up .9s .6s both; }
   .sf-ticker > p { flex: none; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
@@ -277,7 +277,7 @@ All colors MUST be HSL.
   .sf-orbit-4 { width: 398px; height: 398px; }
   .sf-center-stat strong { font-size: 48px; }
   .sf-center-stat span { font-size: 13px; }
-  .sf-avatar { display: none; }
+  .sf-social { display: none; }
   .sf-ticker { min-height: 76px; padding: 12px 32px 18px; }
 }
 
